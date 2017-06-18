@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Net.Http;
-
 namespace HelloWorldConsole
 {
 	class Program
@@ -21,6 +20,7 @@ namespace HelloWorldConsole
 				var responseText = await client.GetStringAsync(apiEndpoint);
 				Console.WriteLine(responseText);
 			}
+
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
