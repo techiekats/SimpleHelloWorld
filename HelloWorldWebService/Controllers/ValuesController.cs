@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using HelloWorldWebService.DateProviders;
 using System.Web.Mvc;
 
 namespace HelloWorldWebService.Controllers
@@ -9,6 +6,11 @@ namespace HelloWorldWebService.Controllers
 	//[RoutePrefix("api/values")]
 	public class ValuesController : Controller
     {
+		private IDataProvider dataprovider;
+		public ValuesController (IDataProvider injectedDataProvider)
+		{
+			dataprovider = injectedDataProvider;
+		}
         // GET: Values
         public ActionResult Index()
         {
@@ -18,7 +20,7 @@ namespace HelloWorldWebService.Controllers
 		[HttpGet]
 		public string GetHelloWorldText  (int id)
 		{
-			return "Hello World";
+			return dataprovider.GetHelloWorldText(id);
 		}
     }
 }
