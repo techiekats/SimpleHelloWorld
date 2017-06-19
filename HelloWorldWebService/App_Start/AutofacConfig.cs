@@ -11,7 +11,9 @@ namespace HelloWorldWebService
 		public static void Initialize ()
 		{
 			var builder = new ContainerBuilder();
-			builder.Register(c => new SimpleStringProvider()).As<IDataProvider>();
+			var source = new SimpleStringProvider();
+			builder.Register(c => source).As<IDataProvider>();
+			builder.Register(c => source).As<IContentWriter>();
 			builder.RegisterType<ValuesController>();
 			var container = builder.Build();
 			DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -3,24 +3,29 @@ using System.Web.Mvc;
 
 namespace HelloWorldWebService.Controllers
 {
-	//[RoutePrefix("api/values")]
 	public class ValuesController : Controller
     {
 		private IDataProvider dataprovider;
-		public ValuesController (IDataProvider injectedDataProvider)
+		private IContentWriter contentWriter;
+		public ValuesController (IDataProvider injectedDataProvider, IContentWriter injectedContentWriter)
 		{
 			dataprovider = injectedDataProvider;
+			contentWriter = injectedContentWriter;
 		}
         // GET: Values
         public ActionResult Index()
         {
             return View();
         }
-		//[Route("gethelloworldtext")]
 		[HttpGet]
 		public string GetHelloWorldText  (int id)
 		{
 			return dataprovider.GetHelloWorldText(id);
+		}
+		[HttpPost]
+		public void UpdateHelloWorldText (string s)
+		{
+			contentWriter.Write(s);
 		}
     }
 }
